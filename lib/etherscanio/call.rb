@@ -23,9 +23,10 @@ module Etherscanio
     end
 
     def fetch
-      res = RestClient.get(to_s, {}).body
-      parsed = JSON.parse(res)
-      JSON.generate(parsed)
+      # res = RestClient.get(to_s, {}).body
+      # parsed = JSON.parse(res)
+      # JSON.generate(parsed)
+      JSON.parse RestClient.get(to_s, {}).body
     end
 
     def to_s
