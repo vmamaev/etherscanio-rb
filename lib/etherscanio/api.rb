@@ -4,7 +4,7 @@ module Etherscanio
       @api_key = api_key
     end
 
-    def account_txlist(address, startblock, endblock, sort = 'desc', page = nil, offset = nil)
+    def account_txlist(address, startblock, endblock = nil, sort = 'desc', page = nil, offset = nil)
       call = Etherscanio::Call.new('account', 'txlist')
       call.api_key = @api_key
       call.address = address
