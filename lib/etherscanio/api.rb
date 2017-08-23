@@ -1,11 +1,12 @@
 module Etherscanio
   class Api
-    def initialize(api_key = nil)
+    def initialize(api_key = nil, net_name = 'mainnet')
       @api_key = api_key
+      @net_name = net_name
     end
 
     def account_txlist(address, startblock, endblock = nil, sort = 'desc', page = nil, offset = nil)
-      call = Etherscanio::Call.new('account', 'txlist')
+      call = Etherscanio::Call.new(@net_name, 'account', 'txlist')
       call.api_key = @api_key
       call.address = address
       call.startblock = startblock
@@ -17,7 +18,7 @@ module Etherscanio
     end
 
     def account_txlistinternal(address, startblock, endblock, sort = 'desc', page = nil, offset = nil)
-      call = Etherscanio::Call.new('account', 'txlistinternal')
+      call = Etherscanio::Call.new(@net_name, 'account', 'txlistinternal')
       call.api_key = @api_key
       call.address = address
       call.startblock = startblock
@@ -29,7 +30,7 @@ module Etherscanio
     end
 
     def account_balance(address, tag)
-      call = Etherscanio::Call.new('account', 'balance')
+      call = Etherscanio::Call.new(@net_name, 'account', 'balance')
       call.api_key = @api_key
       call.address = address
       call.tag = tag
@@ -37,7 +38,7 @@ module Etherscanio
     end
 
     def account_getminedblocks(address, blocktype, page = nil, offset = nil)
-      call = Etherscanio::Call.new('account', 'getminedblocks')
+      call = Etherscanio::Call.new(@net_name, 'account', 'getminedblocks')
       call.api_key = @api_key
       call.page = page
       call.offset = offset
@@ -47,7 +48,7 @@ module Etherscanio
     end
 
     def account_balancemulti(address, tag)
-      call = Etherscanio::Call.new('account', 'balancemulti')
+      call = Etherscanio::Call.new(@net_name, 'account', 'balancemulti')
       call.api_key = @api_key
       call.address = address
       call.tag = tag
@@ -55,21 +56,21 @@ module Etherscanio
     end
 
     def contract_getabi(address)
-      call = Etherscanio::Call.new('contract', 'getabi')
+      call = Etherscanio::Call.new(@net_name, 'contract', 'getabi')
       call.api_key = @api_key
       call.address = address
       call.fetch
     end
 
     def transaction_getstatus(txhash)
-      call = Etherscanio::Call.new('transaction', 'getstatus')
+      call = Etherscanio::Call.new(@net_name, 'transaction', 'getstatus')
       call.api_key = @api_key
       call.txhash = txhash
       call.fetch
     end
 
     def block_getblockreward(blockno)
-      call = Etherscanio::Call.new('block', 'getblockreward')
+      call = Etherscanio::Call.new(@net_name, 'block', 'getblockreward')
       call.api_key = @api_key
       call.blockno = blockno
       call.fetch
