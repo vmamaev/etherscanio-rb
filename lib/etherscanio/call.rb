@@ -15,8 +15,9 @@ module Etherscanio
                   :blocktype,
                   :txhash,
                   :blockno
-    def initialize(mod, action)
-      @base = 'http://api.etherscan.io/api?'
+    def initialize(net_name='mainnet', mod, action)
+      @net_name = net_name
+      @base = build_base_url
       @mod = mod
       @action = action
       @api_key = false
@@ -46,6 +47,19 @@ module Etherscanio
     end
 
     private
+
+    def build_base_url
+        case @net_name
+          when 'ropsten'
+            "http://ropsten.etherscan.io/api?"
+          when 'kovan'
+            "http://kovan.etherscan.io/api?"
+          when 'rinkeby'
+            "http://rinkeby.etherscan.io/api?"
+          else
+            "http://api.etherscan.io/api?"
+        end
+    end
 
     def address_fragment
       res = ''
